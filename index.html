@@ -1,784 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Havi's Family Adventure - Malaysia</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
     <style>
-        #animated-text {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    margin-top: 20px;
-}
-
-.malaysia-flag {
-    font-size: 40px;
-    margin-bottom: 10px;
-}
-
-.malaysia-reveal {
-    display: flex;
-    gap: 10px; /* spacing between letters */
-}
-
-.malaysia-letter {
-    font-size: 48px;
-    opacity: 0;
-    animation: pulseIn 0.6s forwards;
-}
-
-@keyframes pulseIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            font-weight: 300;
-            color: #1f2937;
-            background: #fafafa;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* HOME PAGE STYLES */
-        .home-page {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
-            position: relative;
-        }
-
-        .main-banner {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 8rem;
-            font-weight: 400;
-            color: #f59e0b;
-            letter-spacing: 0.1em;
-            margin-bottom: 80px;
-            animation: fadeInScale 2s ease-out;
-            text-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8) translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .animated-text-container {
-            height: 180px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 60px;
-            perspective: 1000px;
-        }
-
-        .question, .answer {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            margin: 8px 0;
-            opacity: 0;
-            transform: translateY(50px) rotateX(45deg);
-            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .question.show, .answer.show {
-            opacity: 1;
-            transform: translateY(0) rotateX(0deg);
-        }
-
-        .question {
-            color: #f9fafb;
-            text-transform: uppercase;
-        }
-
-        .answer {
-            color: #f59e0b;
-            font-weight: 500;
-        }
-
-        .countdown {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 6rem;
-            color: #f59e0b;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-        }
-
-        .malaysia-reveal {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 20rem;
-            color: white;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            position: relative;
-            z-index: 10;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: row;
-        }
-
-        .malaysia-letter {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(100px) rotateX(90deg);
-            animation: letterDrop 0.8s ease-out forwards;
-        }
-
-        @keyframes letterDrop {
-            0% {
-                opacity: 0;
-                transform: translateY(100px) rotateX(90deg) scale(0.3);
-            }
-            50% {
-                opacity: 1;
-                transform: translateY(-20px) rotateX(45deg) scale(1.1);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) rotateX(0deg) scale(1);
-            }
-        }
-
-        .malaysia-flag {
-            font-size: 6rem;
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: flagWave 2s ease-out 7s forwards;
-        }
-
-        @keyframes flagWave {
-            0% {
-                opacity: 0;
-                transform: scale(0) rotate(-180deg);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.2) rotate(10deg);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
-        }
-
-        .fireworks {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .firework {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #f59e0b;
-            border-radius: 50%;
-            animation: fireworkBurst 3s ease-out;
-        }
-
-        @keyframes fireworkBurst {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-                box-shadow: 0 0 10px #f59e0b;
-            }
-            100% {
-                opacity: 0;
-                transform: scale(25);
-                box-shadow: 0 0 50px #f59e0b;
-            }
-        }
-
-        .cta-button {
-            font-family: 'Oswald', sans-serif;
-            background: transparent;
-            color: #f59e0b;
-            border: 2px solid #f59e0b;
-            padding: 20px 50px;
-            font-size: 1.4rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(30px);
-            border-radius: 8px;
-        }
-
-        .cta-button.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .cta-button:hover {
-            background: #f59e0b;
-            color: #1f2937;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
-        }
-
-        /* DAY PAGE STYLES */
-        .day-page {
-            display: none;
-            min-height: 100vh;
-            background: #f9fafb;
-            animation: pageSlideIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .day-page.active {
-            display: block;
-        }
-
-        @keyframes pageSlideIn {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .day-header {
-            text-align: center;
-            padding: 60px 40px 40px;
-            border-bottom: 1px solid #e5e7eb;
-            background: #ffffff;
-            animation: headerFadeIn 1s ease-out 0.2s both;
-        }
-
-        @keyframes headerFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .day-header h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 4.5rem;
-            font-weight: 400;
-            color: #1f2937;
-            letter-spacing: 0.1em;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            animation: titleSlideUp 1s ease-out 0.4s both;
-        }
-
-        @keyframes titleSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .day-header .day-number {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 8rem;
-            color: #f59e0b;
-            line-height: 0.8;
-            margin-bottom: 10px;
-            animation: numberBounce 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.6s both;
-            text-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
-        }
-
-        @keyframes numberBounce {
-            from {
-                opacity: 0;
-                transform: scale(0.3) rotate(-180deg);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
-        }
-
-        .day-header p {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* IMAGE CAROUSEL */
-        .carousel-section {
-            padding: 80px 40px;
-            background: #ffffff;
-            display: flex;
-            justify-content: center;
-        }
-
-        .carousel-container {
-            max-width: 1000px;
-            width: 100%;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #1f2937;
-            position: relative;
-            height: 500px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .carousel-header {
-            background: #f59e0b;
-            color: #1f2937;
-            padding: 15px 30px;
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .carousel-wrapper {
-            height: calc(100% - 60px);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .carousel-track {
-            display: flex;
-            height: 100%;
-            animation: infiniteScroll 20s linear infinite;
-            width: calc(100% * 6); /* 3 images + 3 duplicates */
-        }
-
-        .carousel-track:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes infiniteScroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .carousel-slide {
-            flex: 0 0 calc(100% / 6);
-            height: 100%;
-            position: relative;
-            border-right: 1px solid #374151;
-        }
-
-        .carousel-slide:last-child {
-            border-right: none;
-        }
-
-        .image-placeholder {
-            width: 100%;
-            height: 100%;
-            background: #f3f4f6;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #6b7280;
-            border: 2px dashed #d1d5db;
-            position: relative;
-        }
-
-        .placeholder-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: #f59e0b;
-        }
-
-        .placeholder-text {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1rem;
-            font-weight: 400;
-            text-align: center;
-            color: #4b5563;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .url-input {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            right: 10px;
-            padding: 8px 12px;
-            border: 1px solid #f59e0b;
-            background: rgba(255, 255, 255, 0.95);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            color: #1f2937;
-            border-radius: 6px;
-        }
-
-        .url-input:focus {
-            outline: none;
-            border-color: #d97706;
-            background: #fff;
-            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
-        }
-
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* ITINERARY SECTION */
-        .itinerary-section {
-            padding: 60px 40px;
-            background: #f3f4f6;
-        }
-
-        .itinerary-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .itinerary-header {
-            background: #1f2937;
-            color: #f59e0b;
-            padding: 25px 40px;
-            border-bottom: 1px solid #374151;
-        }
-
-        .itinerary-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .schedule-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 0;
-        }
-
-        .schedule-item {
-            display: flex;
-            align-items: center;
-            padding: 25px 30px;
-            border-right: 1px solid #f3f4f6;
-            border-bottom: 1px solid #f3f4f6;
-            transition: all 0.3s ease;
-            background: #ffffff;
-        }
-
-        .schedule-item:hover {
-            background: #fef3c7;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
-        }
-
-        .schedule-time {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 400;
-            color: #1f2937;
-            background: #f9fafb;
-            padding: 8px 15px;
-            margin-right: 25px;
-            min-width: 90px;
-            text-align: center;
-            border: 1px solid #e5e7eb;
-            letter-spacing: 0.05em;
-            border-radius: 6px;
-        }
-
-        .schedule-item:hover .schedule-time {
-            background: #f59e0b;
-            color: #ffffff;
-            border-color: #d97706;
-        }
-
-        .schedule-activity {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            font-weight: 400;
-            color: #374151;
-        }
-
-        .schedule-item:hover .schedule-activity {
-            color: #1f2937;
-        }
-
-        /* NAVIGATION */
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 40px;
-            background: #ffffff;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .nav-button {
-            font-family: 'Oswald', sans-serif;
-            background: #ffffff;
-            color: #1f2937;
-            border: 1px solid #e5e7eb;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-        }
-
-        .nav-button:hover {
-            background: #1f2937;
-            color: #f59e0b;
-            border-color: #1f2937;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(31, 41, 55, 0.2);
-        }
-
-        .nav-button:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            background: #f9fafb;
-            color: #9ca3af;
-            border-color: #e5e7eb;
-        }
-
-        .nav-button:disabled:hover {
-            background: #f9fafb;
-            color: #9ca3af;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .page-indicator {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 400;
-            color: #ffffff;
-            background: #1f2937;
-            padding: 12px 25px;
-            border: 1px solid #f59e0b;
-            letter-spacing: 0.1em;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .main-banner {
-                font-size: 4rem;
-            }
-
-            .malaysia-reveal {
-                font-size: 6rem;
-            }
-
-            .question, .answer {
-                font-size: 2rem;
-            }
-
-            .day-header h1 {
-                font-size: 3rem;
-            }
-
-            .day-header .day-number {
-                font-size: 5rem;
-            }
-
-            .carousel-container {
-                height: 400px;
-            }
-
-            .schedule-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .navigation {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-
-        .hidden {
-            display: none;
-        }
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,sans-serif;font-weight:300;color:#1f2937;background:#fafafa;min-height:100vh;overflow-x:hidden}.home-page{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;text-align:center;padding:60px 20px;background:linear-gradient(135deg,#1f2937 0%,#374151 100%);position:relative}.main-banner{font-family:'Bebas Neue',sans-serif;font-size:8rem;font-weight:400;color:#f59e0b;letter-spacing:.1em;margin-bottom:80px;animation:fadeInScale 2s ease-out;text-shadow:0 4px 20px rgba(245,158,11,.3)}@keyframes fadeInScale{from{opacity:0;transform:scale(.8) translateY(50px)}to{opacity:1;transform:scale(1) translateY(0)}}.animated-text-container{height:180px;display:flex;flex-direction:column;justify-content:center;align-items:center;margin-bottom:60px;perspective:1000px}.question,.answer{font-family:Oswald,sans-serif;font-size:2.8rem;font-weight:400;letter-spacing:.05em;margin:8px 0;opacity:0;transform:translateY(50px) rotateX(45deg);transition:all .8s cubic-bezier(.68,-.55,.265,1.55)}.question.show,.answer.show{opacity:1;transform:translateY(0) rotateX(0deg)}.question{color:#f9fafb;text-transform:uppercase}.answer{color:#f59e0b;font-weight:500}.countdown{font-family:'Bebas Neue',sans-serif;font-size:6rem;color:#f59e0b;font-weight:400;letter-spacing:.1em}.malaysia-reveal{font-family:'Bebas Neue',sans-serif;font-size:20rem;color:white;font-weight:400;letter-spacing:.15em;position:relative;z-index:10;display:flex;justify-content:center;align-items:center;flex-direction:row}.malaysia-letter{display:inline-block;opacity:0;transform:translateY(100px) rotateX(90deg);animation:letterDrop .8s ease-out forwards}@keyframes letterDrop{0%{opacity:0;transform:translateY(100px) rotateX(90deg) scale(.3)}50%{opacity:1;transform:translateY(-20px) rotateX(45deg) scale(1.1)}100%{opacity:1;transform:translateY(0) rotateX(0deg) scale(1)}}.malaysia-flag{font-size:6rem;margin-bottom:20px;opacity:0;animation:flagWave 2s ease-out 7s forwards}@keyframes flagWave{0%{opacity:0;transform:scale(0) rotate(-180deg)}50%{opacity:1;transform:scale(1.2) rotate(10deg)}100%{opacity:1;transform:scale(1) rotate(0deg)}}.fireworks{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}.firework{position:absolute;width:6px;height:6px;background:#f59e0b;border-radius:50%;animation:fireworkBurst 3s ease-out}@keyframes fireworkBurst{0%{opacity:1;transform:scale(1);box-shadow:0 0 10px #f59e0b}100%{opacity:0;transform:scale(25);box-shadow:0 0 50px #f59e0b}}.cta-button{font-family:Oswald,sans-serif;background:transparent;color:#f59e0b;border:2px solid #f59e0b;padding:20px 50px;font-size:1.4rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s ease;opacity:0;transform:translateY(30px);border-radius:8px}.cta-button.show{opacity:1;transform:translateY(0)}.cta-button:hover{background:#f59e0b;color:#1f2937;transform:translateY(-2px);box-shadow:0 10px 30px rgba(245,158,11,.3)}.day-page{display:none;min-height:100vh;background:#f9fafb;animation:pageSlideIn .8s cubic-bezier(.68,-.55,.265,1.55)}.day-page.active{display:block}@keyframes pageSlideIn{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}.day-header{text-align:center;padding:60px 40px 40px;border-bottom:1px solid #e5e7eb;background:#fff;animation:headerFadeIn 1s ease-out .2s both}@keyframes headerFadeIn{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}.day-header h1{font-family:'Bebas Neue',sans-serif;font-size:4.5rem;font-weight:400;color:#1f2937;letter-spacing:.1em;margin-bottom:15px;text-transform:uppercase;animation:titleSlideUp 1s ease-out .4s both}@keyframes titleSlideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.day-header .day-number{font-family:'Bebas Neue',sans-serif;font-size:8rem;color:#f59e0b;line-height:.8;margin-bottom:10px;animation:numberBounce 1.2s cubic-bezier(.68,-.55,.265,1.55) .6s both;text-shadow:0 4px 15px rgba(245,158,11,.2)}@keyframes numberBounce{from{opacity:0;transform:scale(.3) rotate(-180deg)}to{opacity:1;transform:scale(1) rotate(0deg)}}.day-header p{font-family:Inter,sans-serif;font-size:1.1rem;font-weight:400;color:#6b7280;text-transform:uppercase;letter-spacing:.1em}.carousel-section{padding:80px 40px;background:#fff;display:flex;justify-content:center}.carousel-container{max-width:1000px;width:100%;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;background:#1f2937;position:relative;height:500px;box-shadow:0 10px 25px rgba(0,0,0,.1)}.carousel-header{background:#f59e0b;color:#1f2937;padding:15px 30px;font-family:Oswald,sans-serif;font-size:1.2rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center}.carousel-controls{display:flex;gap:10px;align-items:center}.carousel-nav-btn{background:rgba(31,41,55,0.8);color:#f59e0b;border:1px solid #f59e0b;padding:8px 12px;cursor:pointer;border-radius:4px;font-size:14px;transition:all 0.3s ease}.carousel-nav-btn:hover{background:#f59e0b;color:#1f2937}.carousel-nav-btn:disabled{opacity:0.5;cursor:not-allowed}.auto-scroll-toggle{background:rgba(31,41,55,0.8);color:#f59e0b;border:1px solid #f59e0b;padding:6px 10px;cursor:pointer;border-radius:4px;font-size:12px;transition:all 0.3s ease}.auto-scroll-toggle:hover{background:#f59e0b;color:#1f2937}.auto-scroll-toggle.active{background:#f59e0b;color:#1f2937}.carousel-wrapper{height:calc(100% - 60px);overflow:hidden;position:relative}.carousel-track{display:flex;height:100%;transition:transform 0.5s ease-in-out;width:calc(100% * 8)}.carousel-track.auto-scrolling{animation:infiniteScroll 30s linear infinite}@keyframes infiniteScroll{0%{transform:translateX(0)}100%{transform:translateX(-75%)}}.carousel-slide{flex:0 0 calc(100% / 8);height:100%;position:relative;border-right:1px solid #374151}.carousel-slide:last-child{border-right:none}.image-placeholder{width:100%;height:100%;background:#f3f4f6;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#6b7280;border:2px dashed #d1d5db;position:relative}.placeholder-icon{font-size:3rem;margin-bottom:15px;color:#f59e0b}.placeholder-text{font-family:Oswald,sans-serif;font-size:1rem;font-weight:400;text-align:center;color:#4b5563;text-transform:uppercase;letter-spacing:.05em}.url-input{position:absolute;bottom:10px;left:10px;right:10px;padding:8px 12px;border:1px solid #f59e0b;background:rgba(255,255,255,.95);font-family:Inter,sans-serif;font-size:.9rem;color:#1f2937;border-radius:6px}.url-input:focus{outline:none;border-color:#d97706;background:#fff;box-shadow:0 0 0 3px rgba(245,158,11,.1)}.carousel-slide img{width:100%;height:100%;object-fit:cover;display:block}.carousel-indicators{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px}.carousel-indicator{width:8px;height:8px;border-radius:50%;background:rgba(245,158,11,0.5);cursor:pointer;transition:all 0.3s ease}.carousel-indicator.active{background:#f59e0b;transform:scale(1.2)}.itinerary-section{padding:60px 40px;background:#f3f4f6}.itinerary-container{max-width:1200px;margin:0 auto;background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.1)}.itinerary-header{background:#1f2937;color:#f59e0b;padding:25px 40px;border-bottom:1px solid #374151}.itinerary-title{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase}.schedule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0}.schedule-item{display:flex;align-items:center;padding:25px 30px;border-right:1px solid #f3f4f6;border-bottom:1px solid #f3f4f6;transition:all .3s ease;background:#fff}.schedule-item:hover{background:#fef3c7;transform:translateY(-2px);box-shadow:0 4px 12px rgba(245,158,11,.15)}.schedule-time{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;font-weight:400;color:#1f2937;background:#f9fafb;padding:8px 15px;margin-right:25px;min-width:90px;text-align:center;border:1px solid #e5e7eb;letter-spacing:.05em;border-radius:6px}.schedule-item:hover .schedule-time{background:#f59e0b;color:#fff;border-color:#d97706}.schedule-activity{font-family:Inter,sans-serif;font-size:1rem;font-weight:400;color:#374151}.schedule-item:hover .schedule-activity{color:#1f2937}.navigation{display:flex;justify-content:space-between;align-items:center;padding:40px;background:#fff;border-top:1px solid #e5e7eb}.nav-button{font-family:Oswald,sans-serif;background:#fff;color:#1f2937;border:1px solid #e5e7eb;padding:15px 30px;font-size:1.1rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:all .3s ease;border-radius:8px}.nav-button:hover{background:#1f2937;color:#f59e0b;border-color:#1f2937;transform:translateY(-2px);box-shadow:0 4px 12px rgba(31,41,55,.2)}.nav-button:disabled{opacity:.4;cursor:not-allowed;background:#f9fafb;color:#9ca3af;border-color:#e5e7eb}.nav-button:disabled:hover{background:#f9fafb;color:#9ca3af;transform:none;box-shadow:none}.page-indicator{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;font-weight:400;color:#fff;background:#1f2937;padding:12px 25px;border:1px solid #f59e0b;letter-spacing:.1em;border-radius:8px;box-shadow:0 2px 8px rgba(245,158,11,.2)}@media (max-width:768px){.main-banner{font-size:4rem}.malaysia-reveal{font-size:6rem}.question,.answer{font-size:2rem}.day-header h1{font-size:3rem}.day-header .day-number{font-size:5rem}.carousel-container{height:400px}.schedule-grid{grid-template-columns:1fr}.navigation{flex-direction:column;gap:20px}.carousel-header{flex-direction:column;gap:10px;text-align:center}.carousel-controls{justify-content:center}}.hidden{display:none}
     </style>
 </head>
 <body>
-<!-- HOME PAGE -->
 <div id="home-page" class="home-page">
     <div class="fireworks" id="fireworks"></div>
-
     <h1 class="main-banner">HAVI'S FAMILY ADVENTURE</h1>
-
-    <div class="animated-text-container" id="animated-text">
-        <!-- Animated questions and answers will appear here -->
-    </div>
-
-    <button class="cta-button hidden" id="cta-button" onclick="goToDay(1)">
-        Explore Our Journey
-    </button>
+    <div class="animated-text-container" id="animated-text"></div>
+    <button class="cta-button hidden" id="cta-button" onclick="goToDay(1)">Explore Our Journey</button>
 </div>
-
-<!-- DAY 1 PAGE -->
 <div id="day-1" class="day-page">
     <div class="day-header">
         <div class="day-number">01</div>
         <h1>Arrival & Petronas Twin Towers</h1>
-        <p>KLCC Fountains Show & City Lights</p>
-    </div>
-
+        <p>KLCC Fountains Show & City Lights</p></div>
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-header">
-                Day 1 Highlights
+                <span>Day 1 Highlights</span>
+                <div class="carousel-controls">
+                    <button class="carousel-nav-btn" onclick="carouselPrev(this)">‹</button>
+                    <button class="carousel-nav-btn" onclick="carouselNext(this)">›</button>
+                    <button class="auto-scroll-toggle active" onclick="toggleAutoScroll(this)">AUTO</button>
+                </div>
             </div>
             <div class="carousel-wrapper">
-                <div class="carousel-track">
+                <div class="carousel-track auto-scrolling">
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🏢</div>
-                            <div class="placeholder-text">
-                                <strong>Petronas Twin Towers</strong><br>
-                                Iconic 452m Architecture
-                            </div>
-                            <input type="text" class="url-input" placeholder="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQgC9itCeM-_12DK-fb5YbXSP0pYuAwqVWOv1cgevCG_1xTFTfWDWTAOplBGCNlGleXIG2PqbqNmCilwobxsfgYL8GKmJY85GwfUPGX5Q">
+                            <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQgC9itCeM-_12DK-fb5YbXSP0pYuAwqVWOv1cgevCG_1xTFTfWDWTAOplBGCNlGleXIG2PqbqNmCilwobxsfgYL8GKmJY85GwfUPGX5Q">
                         </div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">⛲</div>
-                            <div class="placeholder-text">
-                                <strong>KLCC Fountain Show</strong><br>
-                                Musical Water Display
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add KLCC fountain show image URL">
+                            <img src="https://www.cktravels.com/wp-content/uploads/2024/01/KLNIGHT4.jpg">
                         </div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🌃</div>
-                            <div class="placeholder-text">
-                                <strong>Night Cityscape</strong><br>
-                                KL After Dark
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add KL night skyline image URL">
-                        </div>
-                    </div>
-                    <!-- Duplicate slides for infinite loop -->
-                    <div class="carousel-slide">
-                        <div class="image-placeholder">
-                            <div class="placeholder-icon">🏢</div>
-                            <div class="placeholder-text">
-                                <strong>Petronas Twin Towers</strong><br>
-                                Iconic 452m Architecture
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Petronas Towers image URL">
+                            <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4np-Dsp99sqbtw4hqqNwpa5pTfrH6bxFTuUURGJZ_NDCuqfEr8KqQ5S81ARmw5uvPHaB_Lag94z7csHx5tMNw6z9m8F1R0Dv-00xgR3qAWPvT88C3WuV0qdeKmStp3Slu7b7-llJ=s1360-w1360-h1020-rw">
                         </div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">⛲</div>
-                            <div class="placeholder-text">
-                                <strong>KLCC Fountain Show</strong><br>
-                                Musical Water Display
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add KLCC fountain show image URL">
+                            <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrVelhjXLeRNrigLziM2scSZQ-zFEAa_5B_b-WD8aRxaRafyffH-wKqBtYTD4MfrV01C8Lx0ugYih-DTO3b6v_pjZWIhyDs5Ke5gIyjuetAly7-qtBIKtgBvl5VwSJypjIST2zTTZc4TsBM=s1360-w1360-h1020-rw">
+                        </div>
+                    </div>
+                    <!-- Duplicate slides for smooth infinite scroll -->
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQgC9itCeM-_12DK-fb5YbXSP0pYuAwqVWOv1cgevCG_1xTFTfWDWTAOplBGCNlGleXIG2PqbqNmCilwobxsfgYL8GKmJY85GwfUPGX5Q">
                         </div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🌃</div>
-                            <div class="placeholder-text">
-                                <strong>Night Cityscape</strong><br>
-                                KL After Dark
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add KL night skyline image URL">
+                            <img src="https://www.cktravels.com/wp-content/uploads/2024/01/KLNIGHT4.jpg">
                         </div>
                     </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4np-Dsp99sqbtw4hqqNwpa5pTfrH6bxFTuUURGJZ_NDCuqfEr8KqQ5S81ARmw5uvPHaB_Lag94z7csHx5tMNw6z9m8F1R0Dv-00xgR3qAWPvT88C3WuV0qdeKmStp3Slu7b7-llJ=s1360-w1360-h1020-rw">
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrVelhjXLeRNrigLziM2scSZQ-zFEAa_5B_b-WD8aRxaRafyffH-wKqBtYTD4MfrV01C8Lx0ugYih-DTO3b6v_pjZWIhyDs5Ke5gIyjuetAly7-qtBIKtgBvl5VwSJypjIST2zTTZc4TsBM=s1360-w1360-h1020-rw">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <div class="carousel-indicator active" onclick="goToSlide(this, 0)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 1)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 2)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 3)"></div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="itinerary-section">
         <div class="itinerary-container">
-            <div class="itinerary-header">
-                <h2 class="itinerary-title">Day 1 Schedule</h2>
-            </div>
+            <div class="itinerary-header"><h2 class="itinerary-title">Day 1 Schedule</h2></div>
             <div class="schedule-grid">
                 <div class="schedule-item">
                     <div class="schedule-time">8:15 AM</div>
                     <div class="schedule-activity">Depart from Chennai</div>
                 </div>
                 <div class="schedule-item">
-                    <div class="schedule-time">4:00 PM</div>
-                    <div class="schedule-activity">Airport to Airbnb</div>
+                    <div class="schedule-time">3:00 PM</div>
+                    <div class="schedule-activity">Arrive at KauLumpur Airport</div>
                 </div>
                 <div class="schedule-item">
                     <div class="schedule-time">5:00 PM</div>
-                    <div class="schedule-activity">Check-in Airbnb</div>
+                    <div class="schedule-activity">Check-in to Airbnb</div>
                 </div>
                 <div class="schedule-item">
                     <div class="schedule-time">6:00 PM</div>
@@ -796,93 +117,72 @@
         </div>
     </div>
 </div>
-
-<!-- DAY 2 PAGE -->
 <div id="day-2" class="day-page">
     <div class="day-header">
         <div class="day-number">02</div>
         <h1>Genting Highlands Adventure</h1>
-        <p>Awana Skyway Cable Car & Theme Parks</p>
-    </div>
-
+        <p>Awana Skyway Cable Car & Theme Parks</p></div>
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-header">
-                Day 2 Highlights
+                <span>Day 2 Highlights</span>
+                <div class="carousel-controls">
+                    <button class="carousel-nav-btn" onclick="carouselPrev(this)">‹</button>
+                    <button class="carousel-nav-btn" onclick="carouselNext(this)">›</button>
+                    <button class="auto-scroll-toggle active" onclick="toggleAutoScroll(this)">AUTO</button>
+                </div>
             </div>
             <div class="carousel-wrapper">
-                <div class="carousel-track">
+                <div class="carousel-track auto-scrolling">
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🚡</div>
-                            <div class="placeholder-text">
-                                <strong>Awana Skyway</strong><br>
-                                Mountain Cable Car
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Genting cable car image URL">
+                            <img src="https://cdn.tripspoint.com/uploads/photos/14640/genting-highlands-day-trip-with-cable-cable-car-sic_RNtYR.jpeg">
                         </div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🎢</div>
-                            <div class="placeholder-text">
-                                <strong>Theme Park</strong><br>
-                                Indoor Adventures
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Genting theme park image URL">
+                            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/d9/ae/34/above-the-clouds-beyond.jpg?w=900&h=-1&s=1"></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <img src="https://www.gentingskyworlds.com/content/dam/approved/genting-skyworlds/web/faq/frequently-asked-questions.jpg"></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <img src="https://rbdatum.s3.amazonaws.com/image/oEoNv48f"></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <IMG src="https://images.wanderon.in/gallery/new/2025/03/03/1740986704496-things-to-do-in-genting-highlands.jpg"></div>
+                    </div>
+                    <!-- Duplicate slides for smooth infinite scroll -->
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <img src="https://cdn.tripspoint.com/uploads/photos/14640/genting-highlands-day-trip-with-cable-cable-car-sic_RNtYR.jpeg">
                         </div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🏔️</div>
-                            <div class="placeholder-text">
-                                <strong>Highland Views</strong><br>
-                                Mountain Scenery
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add mountain views image URL">
-                        </div>
-                    </div>
-                    <!-- Duplicate slides -->
-                    <div class="carousel-slide">
-                        <div class="image-placeholder">
-                            <div class="placeholder-icon">🚡</div>
-                            <div class="placeholder-text">
-                                <strong>Awana Skyway</strong><br>
-                                Mountain Cable Car
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Genting cable car image URL">
-                        </div>
+                            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/d9/ae/34/above-the-clouds-beyond.jpg?w=900&h=-1&s=1"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🎢</div>
-                            <div class="placeholder-text">
-                                <strong>Theme Park</strong><br>
-                                Indoor Adventures
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Genting theme park image URL">
-                        </div>
+                            <img src="https://www.gentingskyworlds.com/content/dam/approved/genting-skyworlds/web/faq/frequently-asked-questions.jpg"></div>
                     </div>
-                    <div class="carousel-slide">
-                        <div class="image-placeholder">
-                            <div class="placeholder-icon">🏔️</div>
-                            <div class="placeholder-text">
-                                <strong>Highland Views</strong><br>
-                                Mountain Scenery
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add mountain views image URL">
-                        </div>
-                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <div class="carousel-indicator active" onclick="goToSlide(this, 0)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 1)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 2)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 3)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 4)"></div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="itinerary-section">
         <div class="itinerary-container">
-            <div class="itinerary-header">
-                <h2 class="itinerary-title">Day 2 Schedule</h2>
-            </div>
+            <div class="itinerary-header"><h2 class="itinerary-title">Day 2 Schedule</h2></div>
             <div class="schedule-grid">
                 <div class="schedule-item">
                     <div class="schedule-time">8:00 AM</div>
@@ -920,93 +220,73 @@
         </div>
     </div>
 </div>
-
-<!-- DAY 3 PAGE -->
 <div id="day-3" class="day-page">
     <div class="day-header">
         <div class="day-number">03</div>
         <h1>Cultural & Spiritual Journey</h1>
-        <p>Batu Caves Rainbow Steps & Temples</p>
-    </div>
-
+        <p>Batu Caves Rainbow Steps & Temples</p></div>
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-header">
-                Day 3 Highlights
+                <span>Day 3 Highlights</span>
+                <div class="carousel-controls">
+                    <button class="carousel-nav-btn" onclick="carouselPrev(this)">‹</button>
+                    <button class="carousel-nav-btn" onclick="carouselNext(this)">›</button>
+                    <button class="auto-scroll-toggle active" onclick="toggleAutoScroll(this)">AUTO</button>
+                </div>
             </div>
             <div class="carousel-wrapper">
-                <div class="carousel-track">
+                <div class="carousel-track auto-scrolling">
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🌈</div>
-                            <div class="placeholder-text">
-                                <strong>Rainbow Steps</strong><br>
-                                272 Colorful Stairs
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Batu Caves steps image URL">
-                        </div>
+                            <img src="https://static.toiimg.com/photo/msid-96385098,width-96,height-65.cms"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🕉️</div>
-                            <div class="placeholder-text">
-                                <strong>Lord Murugan</strong><br>
-                                Golden Statue
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Murugan statue image URL">
-                        </div>
+                            <img src="https://herasianadventures.com/wp-content/uploads/2024/09/17-1.jpg"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🕌</div>
-                            <div class="placeholder-text">
-                                <strong>National Mosque</strong><br>
-                                Islamic Architecture
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add mosque image URL">
-                        </div>
-                    </div>
-                    <!-- Duplicates -->
-                    <div class="carousel-slide">
-                        <div class="image-placeholder">
-                            <div class="placeholder-icon">🌈</div>
-                            <div class="placeholder-text">
-                                <strong>Rainbow Steps</strong><br>
-                                272 Colorful Stairs
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Batu Caves steps image URL">
-                        </div>
+                            <img src="https://static.toiimg.com/thumb/96385080.cms?resizemode=75&width=1200&height=900"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🕉️</div>
-                            <div class="placeholder-text">
-                                <strong>Lord Murugan</strong><br>
-                                Golden Statue
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Murugan statue image URL">
-                        </div>
+                            <img src="https://selangor.travel/wp-content/uploads/2019/08/Batu_Caves_Gateway_Tourism_Selangor.jpg"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🕌</div>
-                            <div class="placeholder-text">
-                                <strong>National Mosque</strong><br>
-                                Islamic Architecture
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add mosque image URL">
+                            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/9e/a3/95/caption.jpg?w=1200&h=1200&s=1"></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <img src="https://cdn-v2.theculturetrip.com/1200x675/wp-content/uploads/2018/03/shutterstock_713096950.webp"></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <img src="https://www.pelago.com/img/products/MY-Malaysia/kuala-lumpur-little-india-brickfields-guided-walking-tour/fb1e7bf2-2102-4bdb-81ee-6388f82f3ec6_kuala-lumpur-little-india-brickfields-guided-walking-tour.jpg">
                         </div>
                     </div>
+                    <!-- Duplicate slide for smooth infinite scroll -->
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <img src="https://static.toiimg.com/photo/msid-96385098,width-96,height-65.cms"></div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <div class="carousel-indicator active" onclick="goToSlide(this, 0)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 1)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 2)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 3)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 4)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 5)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 6)"></div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="itinerary-section">
         <div class="itinerary-container">
-            <div class="itinerary-header">
-                <h2 class="itinerary-title">Day 3 Schedule</h2>
-            </div>
+            <div class="itinerary-header"><h2 class="itinerary-title">Day 3 Schedule</h2></div>
             <div class="schedule-grid">
                 <div class="schedule-item">
                     <div class="schedule-time">8:00 AM</div>
@@ -1016,21 +296,18 @@
                     <div class="schedule-time">9:00 AM</div>
                     <div class="schedule-activity">Batu Caves Visit</div>
                 </div>
-                <div class="schedule-item">
-                    <div class="schedule-time">11:30 AM</div>
-                    <div class="schedule-activity">Islamic Arts Museum</div>
-                </div>
+
                 <div class="schedule-item">
                     <div class="schedule-time">1:00 PM</div>
                     <div class="schedule-activity">Lunch</div>
                 </div>
                 <div class="schedule-item">
                     <div class="schedule-time">2:30 PM</div>
-                    <div class="schedule-activity">National Mosque</div>
+                    <div class="schedule-activity">Little India</div>
                 </div>
                 <div class="schedule-item">
                     <div class="schedule-time">4:00 PM</div>
-                    <div class="schedule-activity">Central Market</div>
+                    <div class="schedule-activity">Shopping</div>
                 </div>
                 <div class="schedule-item">
                     <div class="schedule-time">7:00 PM</div>
@@ -1040,99 +317,73 @@
         </div>
     </div>
 </div>
-
-<!-- DAY 4 PAGE -->
 <div id="day-4" class="day-page">
     <div class="day-header">
         <div class="day-number">04</div>
         <h1>Sunway Lagoon Theme Park</h1>
-        <p>Water Slides & Adventure Rides</p>
-    </div>
-
+        <p>Water Slides & Adventure Rides</p></div>
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-header">
-                Day 4 Highlights
+                <span>Day 4 Highlights</span>
+                <div class="carousel-controls">
+                    <button class="carousel-nav-btn" onclick="carouselPrev(this)">‹</button>
+                    <button class="carousel-nav-btn" onclick="carouselNext(this)">›</button>
+                    <button class="auto-scroll-toggle active" onclick="toggleAutoScroll(this)">AUTO</button>
+                </div>
             </div>
             <div class="carousel-wrapper">
-                <div class="carousel-track">
+                <div class="carousel-track auto-scrolling">
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🏊</div>
-                            <div class="placeholder-text">
-                                <strong>Water Park</strong><br>
-                                Slides & Pools
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add water park image URL">
-                        </div>
+                            <img src="https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2024/10/29/bccd75f0-d3e7-4629-aad3-d2843022efec-1730173876684-2896664d0342d416e23abee0df3598ea.jpg"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🎠</div>
-                            <div class="placeholder-text">
-                                <strong>Theme Rides</strong><br>
-                                Roller Coasters
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add theme rides image URL">
-                        </div>
+                            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/b1/a1/52/caption.jpg?w=1200&h=-1&s=1"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🐅</div>
-                            <div class="placeholder-text">
-                                <strong>Wildlife Park</strong><br>
-                                Animal Encounters
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add wildlife image URL">
-                        </div>
-                    </div>
-                    <!-- Duplicates -->
-                    <div class="carousel-slide">
-                        <div class="image-placeholder">
-                            <div class="placeholder-icon">🏊</div>
-                            <div class="placeholder-text">
-                                <strong>Water Park</strong><br>
-                                Slides & Pools
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add water park image URL">
-                        </div>
+                            <img src="https://image-tc.galaxy.tf/wijpeg-8wepk69i4sdezwfgtjkfms81t/sunway-lagoon-waterpark_wide.jpg?crop=21%2C0%2C1959%2C1102&width=1100"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🎠</div>
-                            <div class="placeholder-text">
-                                <strong>Theme Rides</strong><br>
-                                Roller Coasters
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add theme rides image URL">
-                        </div>
+                            <img src="https://mediaim.expedia.com/localexpert/570748/d14dd5b2-2c47-42a9-90cb-fe7db2dde6ef.jpg?impolicy=resizecrop&rw=1005&rh=565"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
-                            <div class="placeholder-icon">🐅</div>
-                            <div class="placeholder-text">
-                                <strong>Wildlife Park</strong><br>
-                                Animal Encounters
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add wildlife image URL">
-                        </div>
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipMAX6vr5d6mtgRlUbsNGbqKXalMncMYLkaWEKc0=s1360-w1360-h1020-rw"></div>
                     </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <img src="https://cdn-imgix.headout.com/media/images/a28d2ac320a54f3079f99fb867791a2f-19923-kuala-lumpur-sunway-lagoon-night-park-05.jpg?fm=pjpg&auto=compress&w=1200&crop=faces&fit=min"></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <img src="https://cdn.shopify.com/s/files/1/1301/6863/files/Amusement-Park-8446.jpg?v=1566760926"></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <img src="https://thesmartlocal.my/wp-content/uploads/2025/04/Kid-friendly-rides-Guide-to-Sunway-Lagoon-Studios.jpg"></div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <div class="carousel-indicator active" onclick="goToSlide(this, 0)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 1)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 2)"></div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="itinerary-section">
         <div class="itinerary-container">
-            <div class="itinerary-header">
-                <h2 class="itinerary-title">Day 4 Schedule</h2>
-            </div>
+            <div class="itinerary-header"><h2 class="itinerary-title">Day 4 Schedule</h2></div>
             <div class="schedule-grid">
                 <div class="schedule-item">
                     <div class="schedule-time">8:00 AM</div>
                     <div class="schedule-activity">Breakfast</div>
                 </div>
-                <div class="schedule-item">
+                <div class="carousel-slide">
                     <div class="schedule-time">9:00 AM</div>
                     <div class="schedule-activity">Travel to Sunway Lagoon</div>
                 </div>
@@ -1156,93 +407,88 @@
         </div>
     </div>
 </div>
-
-<!-- DAY 5 PAGE -->
 <div id="day-5" class="day-page">
     <div class="day-header">
         <div class="day-number">05</div>
         <h1>Local Shopping & Relax</h1>
-        <p>Berjaya Times Square & Bukit Bintang Walk</p>
-    </div>
-
+        <p>Berjaya Times Square & Bukit Bintang Walk</p></div>
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-header">
-                Day 5 Highlights
+                <span>Day 5 Highlights</span>
+                <div class="carousel-controls">
+                    <button class="carousel-nav-btn" onclick="carouselPrev(this)">‹</button>
+                    <button class="carousel-nav-btn" onclick="carouselNext(this)">›</button>
+                    <button class="auto-scroll-toggle active" onclick="toggleAutoScroll(this)">AUTO</button>
+                </div>
             </div>
             <div class="carousel-wrapper">
-                <div class="carousel-track">
+                <div class="carousel-track auto-scrolling">
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🛍️</div>
-                            <div class="placeholder-text">
-                                <strong>Berjaya Times Square</strong><br>
-                                Mega Shopping Mall
+                            <div class="placeholder-text"><strong>Berjaya Times Square</strong><br>Mega Shopping Mall
                             </div>
-                            <input type="text" class="url-input" placeholder="Add Times Square mall image URL">
-                        </div>
+                            <input type="text" class="url-input" placeholder="Add Times Square mall image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🚶</div>
-                            <div class="placeholder-text">
-                                <strong>Bukit Bintang Walk</strong><br>
-                                Shopping District
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Bukit Bintang walk image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Bukit Bintang Walk</strong><br>Shopping District</div>
+                            <input type="text" class="url-input" placeholder="Add Bukit Bintang walk image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🍽️</div>
-                            <div class="placeholder-text">
-                                <strong>Local Dining</strong><br>
-                                Street Food & Restaurants
+                            <div class="placeholder-text"><strong>Local Dining</strong><br>Street Food & Restaurants
                             </div>
-                            <input type="text" class="url-input" placeholder="Add local food image URL">
-                        </div>
+                            <input type="text" class="url-input" placeholder="Add local food image URL"></div>
                     </div>
-                    <!-- Duplicates -->
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🛍️</div>
-                            <div class="placeholder-text">
-                                <strong>Berjaya Times Square</strong><br>
-                                Mega Shopping Mall
+                            <div class="placeholder-text"><strong>Berjaya Times Square</strong><br>Mega Shopping Mall
                             </div>
-                            <input type="text" class="url-input" placeholder="Add Times Square mall image URL">
-                        </div>
+                            <input type="text" class="url-input" placeholder="Add Times Square mall image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🚶</div>
-                            <div class="placeholder-text">
-                                <strong>Bukit Bintang Walk</strong><br>
-                                Shopping District
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Bukit Bintang walk image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Bukit Bintang Walk</strong><br>Shopping District</div>
+                            <input type="text" class="url-input" placeholder="Add Bukit Bintang walk image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🍽️</div>
-                            <div class="placeholder-text">
-                                <strong>Local Dining</strong><br>
-                                Street Food & Restaurants
+                            <div class="placeholder-text"><strong>Local Dining</strong><br>Street Food & Restaurants
                             </div>
-                            <input type="text" class="url-input" placeholder="Add local food image URL">
-                        </div>
+                            <input type="text" class="url-input" placeholder="Add local food image URL"></div>
                     </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <div class="placeholder-icon">🛍️</div>
+                            <div class="placeholder-text"><strong>Berjaya Times Square</strong><br>Mega Shopping Mall
+                            </div>
+                            <input type="text" class="url-input" placeholder="Add Times Square mall image URL"></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <div class="placeholder-icon">🚶</div>
+                            <div class="placeholder-text"><strong>Bukit Bintang Walk</strong><br>Shopping District</div>
+                            <input type="text" class="url-input" placeholder="Add Bukit Bintang walk image URL"></div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <div class="carousel-indicator active" onclick="goToSlide(this, 0)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 1)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 2)"></div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="itinerary-section">
         <div class="itinerary-container">
-            <div class="itinerary-header">
-                <h2 class="itinerary-title">Day 5 Schedule</h2>
-            </div>
+            <div class="itinerary-header"><h2 class="itinerary-title">Day 5 Schedule</h2></div>
             <div class="schedule-grid">
                 <div class="schedule-item">
                     <div class="schedule-time">9:00 AM</div>
@@ -1272,93 +518,93 @@
         </div>
     </div>
 </div>
-
-<!-- DAY 6 PAGE -->
 <div id="day-6" class="day-page">
     <div class="day-header">
         <div class="day-number">06</div>
         <h1>Adventure & Shopping</h1>
-        <p>KL Tower Sky Deck & Jalan Alor Food Street</p>
-    </div>
-
+        <p>KL Tower Sky Deck & Jalan Alor Food Street</p></div>
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-header">
-                Day 6 Highlights
+                <span>Day 6 Highlights</span>
+                <div class="carousel-controls">
+                    <button class="carousel-nav-btn" onclick="carouselPrev(this)">‹</button>
+                    <button class="carousel-nav-btn" onclick="carouselNext(this)">›</button>
+                    <button class="auto-scroll-toggle active" onclick="toggleAutoScroll(this)">AUTO</button>
+                </div>
             </div>
             <div class="carousel-wrapper">
-                <div class="carousel-track">
+                <div class="carousel-track auto-scrolling">
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🗼</div>
-                            <div class="placeholder-text">
-                                <strong>KL Tower Sky Deck</strong><br>
-                                421m City Views
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add KL Tower image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>KL Tower Sky Deck</strong><br>421m City Views</div>
+                            <input type="text" class="url-input" placeholder="Add KL Tower image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🏛️</div>
-                            <div class="placeholder-text">
-                                <strong>Merdeka Square</strong><br>
-                                Historic Independence Square
+                            <div class="placeholder-text"><strong>Merdeka Square</strong><br>Historic Independence
+                                Square
                             </div>
-                            <input type="text" class="url-input" placeholder="Add Merdeka Square image URL">
-                        </div>
+                            <input type="text" class="url-input" placeholder="Add Merdeka Square image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🍜</div>
-                            <div class="placeholder-text">
-                                <strong>Jalan Alor Food Street</strong><br>
-                                Famous Night Food Market
+                            <div class="placeholder-text"><strong>Jalan Alor Food Street</strong><br>Famous Night Food
+                                Market
                             </div>
-                            <input type="text" class="url-input" placeholder="Add Jalan Alor image URL">
-                        </div>
+                            <input type="text" class="url-input" placeholder="Add Jalan Alor image URL"></div>
                     </div>
-                    <!-- Duplicates -->
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🗼</div>
-                            <div class="placeholder-text">
-                                <strong>KL Tower Sky Deck</strong><br>
-                                421m City Views
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add KL Tower image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>KL Tower Sky Deck</strong><br>421m City Views</div>
+                            <input type="text" class="url-input" placeholder="Add KL Tower image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🏛️</div>
-                            <div class="placeholder-text">
-                                <strong>Merdeka Square</strong><br>
-                                Historic Independence Square
+                            <div class="placeholder-text"><strong>Merdeka Square</strong><br>Historic Independence
+                                Square
                             </div>
-                            <input type="text" class="url-input" placeholder="Add Merdeka Square image URL">
-                        </div>
+                            <input type="text" class="url-input" placeholder="Add Merdeka Square image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🍜</div>
-                            <div class="placeholder-text">
-                                <strong>Jalan Alor Food Street</strong><br>
-                                Famous Night Food Market
+                            <div class="placeholder-text"><strong>Jalan Alor Food Street</strong><br>Famous Night Food
+                                Market
                             </div>
-                            <input type="text" class="url-input" placeholder="Add Jalan Alor image URL">
-                        </div>
+                            <input type="text" class="url-input" placeholder="Add Jalan Alor image URL"></div>
                     </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <div class="placeholder-icon">🗼</div>
+                            <div class="placeholder-text"><strong>KL Tower Sky Deck</strong><br>421m City Views</div>
+                            <input type="text" class="url-input" placeholder="Add KL Tower image URL"></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <div class="placeholder-icon">🏛️</div>
+                            <div class="placeholder-text"><strong>Merdeka Square</strong><br>Historic Independence
+                                Square
+                            </div>
+                            <input type="text" class="url-input" placeholder="Add Merdeka Square image URL"></div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <div class="carousel-indicator active" onclick="goToSlide(this, 0)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 1)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 2)"></div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="itinerary-section">
         <div class="itinerary-container">
-            <div class="itinerary-header">
-                <h2 class="itinerary-title">Day 6 Schedule</h2>
-            </div>
+            <div class="itinerary-header"><h2 class="itinerary-title">Day 6 Schedule</h2></div>
             <div class="schedule-grid">
                 <div class="schedule-item">
                     <div class="schedule-time">8:00 AM</div>
@@ -1392,93 +638,83 @@
         </div>
     </div>
 </div>
-
-<!-- DAY 7 PAGE -->
 <div id="day-7" class="day-page">
     <div class="day-header">
         <div class="day-number">07</div>
         <h1>Relaxation & Aquatic Adventures</h1>
-        <p>Aquaria KLCC & Spa Time</p>
-    </div>
-
+        <p>Aquaria KLCC & Spa Time</p></div>
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-header">
-                Day 7 Highlights
+                <span>Day 7 Highlights</span>
+                <div class="carousel-controls">
+                    <button class="carousel-nav-btn" onclick="carouselPrev(this)">‹</button>
+                    <button class="carousel-nav-btn" onclick="carouselNext(this)">›</button>
+                    <button class="auto-scroll-toggle active" onclick="toggleAutoScroll(this)">AUTO</button>
+                </div>
             </div>
             <div class="carousel-wrapper">
-                <div class="carousel-track">
+                <div class="carousel-track auto-scrolling">
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🐠</div>
-                            <div class="placeholder-text">
-                                <strong>Aquaria KLCC</strong><br>
-                                Marine Life Adventure
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Aquaria KLCC image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Aquaria KLCC</strong><br>Marine Life Adventure</div>
+                            <input type="text" class="url-input" placeholder="Add Aquaria KLCC image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">💆</div>
-                            <div class="placeholder-text">
-                                <strong>Spa & Massage</strong><br>
-                                Relaxation Time
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add spa massage image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Spa & Massage</strong><br>Relaxation Time</div>
+                            <input type="text" class="url-input" placeholder="Add spa massage image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🛒</div>
-                            <div class="placeholder-text">
-                                <strong>Optional Shopping</strong><br>
-                                Last Minute Finds
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add shopping image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Optional Shopping</strong><br>Last Minute Finds</div>
+                            <input type="text" class="url-input" placeholder="Add shopping image URL"></div>
                     </div>
-                    <!-- Duplicates -->
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🐠</div>
-                            <div class="placeholder-text">
-                                <strong>Aquaria KLCC</strong><br>
-                                Marine Life Adventure
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Aquaria KLCC image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Aquaria KLCC</strong><br>Marine Life Adventure</div>
+                            <input type="text" class="url-input" placeholder="Add Aquaria KLCC image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">💆</div>
-                            <div class="placeholder-text">
-                                <strong>Spa & Massage</strong><br>
-                                Relaxation Time
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add spa massage image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Spa & Massage</strong><br>Relaxation Time</div>
+                            <input type="text" class="url-input" placeholder="Add spa massage image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🛒</div>
-                            <div class="placeholder-text">
-                                <strong>Optional Shopping</strong><br>
-                                Last Minute Finds
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add shopping image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Optional Shopping</strong><br>Last Minute Finds</div>
+                            <input type="text" class="url-input" placeholder="Add shopping image URL"></div>
                     </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <div class="placeholder-icon">🐠</div>
+                            <div class="placeholder-text"><strong>Aquaria KLCC</strong><br>Marine Life Adventure</div>
+                            <input type="text" class="url-input" placeholder="Add Aquaria KLCC image URL"></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <div class="placeholder-icon">💆</div>
+                            <div class="placeholder-text"><strong>Spa & Massage</strong><br>Relaxation Time</div>
+                            <input type="text" class="url-input" placeholder="Add spa massage image URL"></div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <div class="carousel-indicator active" onclick="goToSlide(this, 0)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 1)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 2)"></div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="itinerary-section">
         <div class="itinerary-container">
-            <div class="itinerary-header">
-                <h2 class="itinerary-title">Day 7 Schedule</h2>
-            </div>
+            <div class="itinerary-header"><h2 class="itinerary-title">Day 7 Schedule</h2></div>
             <div class="schedule-grid">
                 <div class="schedule-item">
                     <div class="schedule-time">9:00 AM</div>
@@ -1508,93 +744,86 @@
         </div>
     </div>
 </div>
-
-<!-- DAY 8 PAGE -->
 <div id="day-8" class="day-page">
     <div class="day-header">
         <div class="day-number">08</div>
         <h1>Beach Day Adventure</h1>
-        <p>Port Dickson Beach Activities</p>
-    </div>
-
+        <p>Port Dickson Beach Activities</p></div>
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-header">
-                Day 8 Highlights
+                <span>Day 8 Highlights</span>
+                <div class="carousel-controls">
+                    <button class="carousel-nav-btn" onclick="carouselPrev(this)">‹</button>
+                    <button class="carousel-nav-btn" onclick="carouselNext(this)">›</button>
+                    <button class="auto-scroll-toggle active" onclick="toggleAutoScroll(this)">AUTO</button>
+                </div>
             </div>
             <div class="carousel-wrapper">
-                <div class="carousel-track">
+                <div class="carousel-track auto-scrolling">
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🏖️</div>
-                            <div class="placeholder-text">
-                                <strong>Port Dickson Beach</strong><br>
-                                Coastal Paradise
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Port Dickson beach image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Port Dickson Beach</strong><br>Coastal Paradise</div>
+                            <input type="text" class="url-input" placeholder="Add Port Dickson beach image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🏊‍♂️</div>
-                            <div class="placeholder-text">
-                                <strong>Beach Activities</strong><br>
-                                Swimming & Water Sports
+                            <div class="placeholder-text"><strong>Beach Activities</strong><br>Swimming & Water Sports
                             </div>
-                            <input type="text" class="url-input" placeholder="Add beach activities image URL">
-                        </div>
+                            <input type="text" class="url-input" placeholder="Add beach activities image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🌅</div>
-                            <div class="placeholder-text">
-                                <strong>Coastal Views</strong><br>
-                                Beautiful Seascape
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add coastal view image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Coastal Views</strong><br>Beautiful Seascape</div>
+                            <input type="text" class="url-input" placeholder="Add coastal view image URL"></div>
                     </div>
-                    <!-- Duplicates -->
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🏖️</div>
-                            <div class="placeholder-text">
-                                <strong>Port Dickson Beach</strong><br>
-                                Coastal Paradise
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add Port Dickson beach image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Port Dickson Beach</strong><br>Coastal Paradise</div>
+                            <input type="text" class="url-input" placeholder="Add Port Dickson beach image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🏊‍♂️</div>
-                            <div class="placeholder-text">
-                                <strong>Beach Activities</strong><br>
-                                Swimming & Water Sports
+                            <div class="placeholder-text"><strong>Beach Activities</strong><br>Swimming & Water Sports
                             </div>
-                            <input type="text" class="url-input" placeholder="Add beach activities image URL">
-                        </div>
+                            <input type="text" class="url-input" placeholder="Add beach activities image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🌅</div>
-                            <div class="placeholder-text">
-                                <strong>Coastal Views</strong><br>
-                                Beautiful Seascape
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add coastal view image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Coastal Views</strong><br>Beautiful Seascape</div>
+                            <input type="text" class="url-input" placeholder="Add coastal view image URL"></div>
                     </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <div class="placeholder-icon">🏖️</div>
+                            <div class="placeholder-text"><strong>Port Dickson Beach</strong><br>Coastal Paradise</div>
+                            <input type="text" class="url-input" placeholder="Add Port Dickson beach image URL"></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <div class="placeholder-icon">🏊‍♂️</div>
+                            <div class="placeholder-text"><strong>Beach Activities</strong><br>Swimming & Water Sports
+                            </div>
+                            <input type="text" class="url-input" placeholder="Add beach activities image URL"></div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <div class="carousel-indicator active" onclick="goToSlide(this, 0)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 1)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 2)"></div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="itinerary-section">
         <div class="itinerary-container">
-            <div class="itinerary-header">
-                <h2 class="itinerary-title">Day 8 Schedule</h2>
-            </div>
+            <div class="itinerary-header"><h2 class="itinerary-title">Day 8 Schedule</h2></div>
             <div class="schedule-grid">
                 <div class="schedule-item">
                     <div class="schedule-time">8:00 AM</div>
@@ -1628,93 +857,85 @@
         </div>
     </div>
 </div>
-
-<!-- DAY 9 PAGE -->
 <div id="day-9" class="day-page">
     <div class="day-header">
         <div class="day-number">09</div>
         <h1>Departure Preparations</h1>
-        <p>Final Shopping & Farewell Malaysia</p>
-    </div>
-
+        <p>Final Shopping & Farewell Malaysia</p></div>
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-header">
-                Day 9 Highlights
+                <span>Day 9 Highlights</span>
+                <div class="carousel-controls">
+                    <button class="carousel-nav-btn" onclick="carouselPrev(this)">‹</button>
+                    <button class="carousel-nav-btn" onclick="carouselNext(this)">›</button>
+                    <button class="auto-scroll-toggle active" onclick="toggleAutoScroll(this)">AUTO</button>
+                </div>
             </div>
             <div class="carousel-wrapper">
-                <div class="carousel-track">
+                <div class="carousel-track auto-scrolling">
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🧳</div>
-                            <div class="placeholder-text">
-                                <strong>Packing Day</strong><br>
-                                Prepare for Departure
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add packing image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Packing Day</strong><br>Prepare for Departure</div>
+                            <input type="text" class="url-input" placeholder="Add packing image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🛍️</div>
-                            <div class="placeholder-text">
-                                <strong>Final Shopping</strong><br>
-                                Last Minute Souvenirs
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add final shopping image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Final Shopping</strong><br>Last Minute Souvenirs</div>
+                            <input type="text" class="url-input" placeholder="Add final shopping image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">👋</div>
-                            <div class="placeholder-text">
-                                <strong>Farewell Malaysia</strong><br>
-                                End of Amazing Journey
+                            <div class="placeholder-text"><strong>Farewell Malaysia</strong><br>End of Amazing Journey
                             </div>
-                            <input type="text" class="url-input" placeholder="Add farewell Malaysia image URL">
-                        </div>
+                            <input type="text" class="url-input" placeholder="Add farewell Malaysia image URL"></div>
                     </div>
-                    <!-- Duplicates -->
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🧳</div>
-                            <div class="placeholder-text">
-                                <strong>Packing Day</strong><br>
-                                Prepare for Departure
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add packing image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Packing Day</strong><br>Prepare for Departure</div>
+                            <input type="text" class="url-input" placeholder="Add packing image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">🛍️</div>
-                            <div class="placeholder-text">
-                                <strong>Final Shopping</strong><br>
-                                Last Minute Souvenirs
-                            </div>
-                            <input type="text" class="url-input" placeholder="Add final shopping image URL">
-                        </div>
+                            <div class="placeholder-text"><strong>Final Shopping</strong><br>Last Minute Souvenirs</div>
+                            <input type="text" class="url-input" placeholder="Add final shopping image URL"></div>
                     </div>
                     <div class="carousel-slide">
                         <div class="image-placeholder">
                             <div class="placeholder-icon">👋</div>
-                            <div class="placeholder-text">
-                                <strong>Farewell Malaysia</strong><br>
-                                End of Amazing Journey
+                            <div class="placeholder-text"><strong>Farewell Malaysia</strong><br>End of Amazing Journey
                             </div>
-                            <input type="text" class="url-input" placeholder="Add farewell Malaysia image URL">
-                        </div>
+                            <input type="text" class="url-input" placeholder="Add farewell Malaysia image URL"></div>
                     </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <div class="placeholder-icon">🧳</div>
+                            <div class="placeholder-text"><strong>Packing Day</strong><br>Prepare for Departure</div>
+                            <input type="text" class="url-input" placeholder="Add packing image URL"></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="image-placeholder">
+                            <div class="placeholder-icon">🛍️</div>
+                            <div class="placeholder-text"><strong>Final Shopping</strong><br>Last Minute Souvenirs</div>
+                            <input type="text" class="url-input" placeholder="Add final shopping image URL"></div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <div class="carousel-indicator active" onclick="goToSlide(this, 0)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 1)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(this, 2)"></div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="itinerary-section">
         <div class="itinerary-container">
-            <div class="itinerary-header">
-                <h2 class="itinerary-title">Day 9 Schedule</h2>
-            </div>
+            <div class="itinerary-header"><h2 class="itinerary-title">Day 9 Schedule</h2></div>
             <div class="schedule-grid">
                 <div class="schedule-item">
                     <div class="schedule-time">9:00 AM</div>
@@ -1748,43 +969,29 @@
         </div>
     </div>
 </div>
-
-<!-- NAVIGATION -->
-<div class="navigation" id="navigation" style="display: none;">
-    <button class="nav-button" id="prev-btn" onclick="navigateDay(-1)">
-        ← Previous Day
-    </button>
-
-    <div class="page-indicator" id="page-indicator">
-        Day 1 of 9
-    </div>
-
-    <button class="nav-button" id="next-btn" onclick="navigateDay(1)">
-        Next Day →
-    </button>
+<div class="navigation" id="navigation" style="display:none">
+    <button class="nav-button" id="prev-btn" onclick="navigateDay(-1)">← Previous Day</button>
+    <div class="page-indicator" id="page-indicator">Day 1 of 9</div>
+    <button class="nav-button" id="next-btn" onclick="navigateDay(1)">Next Day →</button>
 </div>
-
 <script>
     let currentDay = 0;
-    const totalDays = 9; // Updated to 9 days
+    const totalDays = 9;
+    const carouselStates = new Map(); // Store current slide index for each carousel
 
-    // Animated text sequences
     const sequences = [
-        { type: 'question', text: 'When are we starting?' },
-        { type: 'answer', text: 'Tomorrow!' },
-        { type: 'question', text: 'How many days?' },
-        { type: 'answer', text: '9 Amazing Days' },
-        { type: 'question', text: 'Where are we going?' },
-        { type: 'countdown', text: '3... 2... 1...' },
-        { type: 'malaysia', text: 'MALAYSIA' }
+        {type: 'question', text: 'When are we starting?'},
+        {type: 'answer', text: 'Tomorrow!'},
+        {type: 'question', text: 'How many days?'},
+        {type: 'answer', text: '9 Amazing Days'},
+        {type: 'question', text: 'Where are we going?'},
+        {type: 'countdown', text: '3... 2... 1...'},
+        {type: 'malaysia', text: 'MALAYSIA'}
     ];
-
     let sequenceIndex = 0;
 
     function createFireworks() {
         const fireworksContainer = document.getElementById('fireworks');
-
-        // Create more dramatic firework bursts
         for (let i = 0; i < 120; i++) {
             setTimeout(() => {
                 const firework = document.createElement('div');
@@ -1792,13 +999,9 @@
                 firework.style.left = Math.random() * 100 + '%';
                 firework.style.top = Math.random() * 100 + '%';
                 firework.style.animationDelay = Math.random() * 1.2 + 's';
-
-                // Random colors for fireworks
                 const colors = ['#f59e0b', '#dc2626', '#059669', '#3b82f6'];
                 firework.style.background = colors[Math.floor(Math.random() * colors.length)];
-
                 fireworksContainer.appendChild(firework);
-
                 setTimeout(() => {
                     firework.remove();
                 }, 3000);
@@ -1809,17 +1012,12 @@
     function animateMalaysiaLetters() {
         const container = document.getElementById('animated-text');
         container.innerHTML = '';
-
-        // Create flag
         const flag = document.createElement('div');
         flag.className = 'malaysia-flag';
         flag.textContent = '🇲🇾';
         container.appendChild(flag);
-
-        // Create Malaysia text container
         const malaysiaContainer = document.createElement('div');
         malaysiaContainer.className = 'malaysia-reveal';
-
         const letters = 'MALAYSIA'.split('');
         letters.forEach((letter, index) => {
             const span = document.createElement('span');
@@ -1828,10 +1026,7 @@
             span.style.animationDelay = `${index * 1}s`;
             malaysiaContainer.appendChild(span);
         });
-
         container.appendChild(malaysiaContainer);
-
-        // Create fireworks after all letters are shown
         setTimeout(() => {
             createFireworks();
         }, 8000);
@@ -1842,7 +1037,6 @@
 
         function showNext() {
             container.innerHTML = '';
-
             if (sequenceIndex >= sequences.length) {
                 setTimeout(() => {
                     document.getElementById('cta-button').classList.remove('hidden');
@@ -1850,17 +1044,13 @@
                 }, 1000);
                 return;
             }
-
             const current = sequences[sequenceIndex];
             const element = document.createElement('div');
-
             if (current.type === 'countdown') {
                 element.className = 'countdown';
                 element.textContent = '3';
                 container.appendChild(element);
-
                 setTimeout(() => element.classList.add('show'), 100);
-
                 setTimeout(() => element.textContent = '2', 1200);
                 setTimeout(() => element.textContent = '1', 2400);
                 setTimeout(() => {
@@ -1869,7 +1059,6 @@
                 }, 3600);
             } else if (current.type === 'malaysia') {
                 animateMalaysiaLetters();
-
                 setTimeout(() => {
                     sequenceIndex++;
                     showNext();
@@ -1878,21 +1067,18 @@
                 element.className = current.type;
                 element.textContent = current.text;
                 container.appendChild(element);
-
                 setTimeout(() => element.classList.add('show'), 100);
-
                 setTimeout(() => {
                     sequenceIndex++;
                     showNext();
                 }, current.type === 'question' ? 2500 : 3000);
             }
         }
-
         setTimeout(showNext, 1500);
     }
 
     function goToDay(day) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({top: 0, behavior: 'smooth'});
         currentDay = day;
         document.getElementById('home-page').style.display = 'none';
         document.getElementById('navigation').style.display = 'flex';
@@ -1900,19 +1086,17 @@
     }
 
     function showDay(day) {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+        window.scrollTo({top: 0, behavior: 'smooth'});
         for (let i = 1; i <= totalDays; i++) {
             const dayElement = document.getElementById(`day-${i}`);
             if (dayElement) {
                 dayElement.classList.remove('active');
             }
         }
-
         const currentDayElement = document.getElementById(`day-${day}`);
         if (currentDayElement) {
             currentDayElement.classList.add('active');
         }
-
         updateNavigation();
     }
 
@@ -1928,14 +1112,116 @@
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const indicator = document.getElementById('page-indicator');
-
         prevBtn.disabled = currentDay === 1;
         nextBtn.disabled = currentDay === totalDays;
-
         indicator.textContent = `Day ${currentDay} of 9`;
     }
 
-    // Image functionality with carousel sync
+    // Enhanced Carousel Functions
+    function getCarouselData(carouselElement) {
+        const track = carouselElement.querySelector('.carousel-track');
+        const slides = track.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+        const uniqueSlides = Math.ceil(totalSlides / 2); // Assuming duplicates for infinite scroll
+
+        return { track, slides, totalSlides, uniqueSlides };
+    }
+
+    function updateCarouselIndicators(container, activeIndex) {
+        const indicators = container.querySelectorAll('.carousel-indicator');
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === activeIndex);
+        });
+    }
+
+    function carouselPrev(button) {
+        const container = button.closest('.carousel-container');
+        const { track, uniqueSlides } = getCarouselData(container);
+        const carouselId = container.closest('.day-page').id + '-carousel';
+
+        let currentIndex = carouselStates.get(carouselId) || 0;
+        currentIndex = (currentIndex - 1 + uniqueSlides) % uniqueSlides;
+        carouselStates.set(carouselId, currentIndex);
+
+        // Pause auto-scroll temporarily
+        track.classList.remove('auto-scrolling');
+        track.style.transform = `translateX(-${(currentIndex / uniqueSlides) * 100}%)`;
+
+        updateCarouselIndicators(container, currentIndex);
+
+        // Resume auto-scroll after manual navigation
+        const toggle = container.querySelector('.auto-scroll-toggle');
+        if (toggle.classList.contains('active')) {
+            setTimeout(() => {
+                track.classList.add('auto-scrolling');
+            }, 3000);
+        }
+    }
+
+    function carouselNext(button) {
+        const container = button.closest('.carousel-container');
+        const { track, uniqueSlides } = getCarouselData(container);
+        const carouselId = container.closest('.day-page').id + '-carousel';
+
+        let currentIndex = carouselStates.get(carouselId) || 0;
+        currentIndex = (currentIndex + 1) % uniqueSlides;
+        carouselStates.set(carouselId, currentIndex);
+
+        // Pause auto-scroll temporarily
+        track.classList.remove('auto-scrolling');
+        track.style.transform = `translateX(-${(currentIndex / uniqueSlides) * 100}%)`;
+
+        updateCarouselIndicators(container, currentIndex);
+
+        // Resume auto-scroll after manual navigation
+        const toggle = container.querySelector('.auto-scroll-toggle');
+        if (toggle.classList.contains('active')) {
+            setTimeout(() => {
+                track.classList.add('auto-scrolling');
+            }, 3000);
+        }
+    }
+
+    function goToSlide(indicator, slideIndex) {
+        const container = indicator.closest('.carousel-container');
+        const { track, uniqueSlides } = getCarouselData(container);
+        const carouselId = container.closest('.day-page').id + '-carousel';
+
+        carouselStates.set(carouselId, slideIndex);
+
+        // Pause auto-scroll temporarily
+        track.classList.remove('auto-scrolling');
+        track.style.transform = `translateX(-${(slideIndex / uniqueSlides) * 100}%)`;
+
+        updateCarouselIndicators(container, slideIndex);
+
+        // Resume auto-scroll after manual navigation
+        const toggle = container.querySelector('.auto-scroll-toggle');
+        if (toggle.classList.contains('active')) {
+            setTimeout(() => {
+                track.classList.add('auto-scrolling');
+            }, 3000);
+        }
+    }
+
+    function toggleAutoScroll(button) {
+        const container = button.closest('.carousel-container');
+        const track = container.querySelector('.carousel-track');
+
+        if (button.classList.contains('active')) {
+            // Turn off auto-scroll
+            button.classList.remove('active');
+            track.classList.remove('auto-scrolling');
+            button.textContent = 'PLAY';
+        } else {
+            // Turn on auto-scroll
+            button.classList.add('active');
+            track.classList.add('auto-scrolling');
+            button.textContent = 'AUTO';
+        }
+    }
+
+    // Initialize carousel states and handle image URL inputs
     document.querySelectorAll('.url-input').forEach((input, index) => {
         input.addEventListener('input', function() {
             const slide = this.closest('.carousel-slide');
@@ -1949,31 +1235,31 @@
             if (this.value.trim()) {
                 const img = document.createElement('img');
                 img.src = this.value.trim();
-
                 img.onerror = function() {
                     this.remove();
+                    placeholder.style.display = 'flex';
                 };
-
                 img.onload = function() {
                     placeholder.style.display = 'none';
                 };
-
                 slide.appendChild(img);
 
-                // Sync with duplicate slide
+                // Update duplicate slides for infinite scroll
                 const track = slide.closest('.carousel-track');
                 const slides = track.querySelectorAll('.carousel-slide');
                 const slideIndex = Array.from(slides).indexOf(slide);
+                const totalSlides = slides.length;
+                const uniqueSlides = Math.ceil(totalSlides / 2);
 
-                if (slideIndex < 3) {
-                    // Sync with duplicate (slides 3-5)
-                    const duplicateSlide = slides[slideIndex + 3];
-                    const duplicateImg = duplicateSlide.querySelector('img');
-                    if (duplicateImg) duplicateImg.remove();
-
-                    const newDuplicateImg = img.cloneNode(true);
-                    duplicateSlide.appendChild(newDuplicateImg);
-                    duplicateSlide.querySelector('.image-placeholder').style.display = 'none';
+                if (slideIndex < uniqueSlides) {
+                    const duplicateSlide = slides[slideIndex + uniqueSlides];
+                    if (duplicateSlide) {
+                        const duplicateImg = duplicateSlide.querySelector('img');
+                        if (duplicateImg) duplicateImg.remove();
+                        const newDuplicateImg = img.cloneNode(true);
+                        duplicateSlide.appendChild(newDuplicateImg);
+                        duplicateSlide.querySelector('.image-placeholder').style.display = 'none';
+                    }
                 }
             } else {
                 placeholder.style.display = 'flex';
@@ -1981,7 +1267,6 @@
         });
     });
 
-    // Start animation on load
     window.addEventListener('load', startAnimation);
 </script>
 </body>
